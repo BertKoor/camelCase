@@ -45,4 +45,13 @@ class CamelCaseApplicationTests {
 				.body("components.camel.status", equalTo("UP"));
 	}
 
+	@Test
+	void pingPongTest() {
+		RestAssured.given().port(port)
+				.when().get("/my-api/ping")
+				.then().statusCode(HttpStatus.SC_OK)
+				.contentType(ContentType.TEXT)
+				.content(equalTo("pong"));
+	}
+
 }

@@ -10,15 +10,17 @@
 	</parent>
 	<groupId>nl.ordina.bertkoor</groupId>
 	<artifactId>camelCase</artifactId>
-	<version>0.0.2</version>
+	<version>0.0.3</version>
 	<name>camelCase</name>
 	<description>Demo project for Apache Camel</description>
 
 	<properties>
 		<java.version>11</java.version>
+		<camel.version>3.3.0</camel.version>
 	</properties>
 
 	<dependencies>
+		<!-- basic Spring Boot Web with actuators -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -28,12 +30,24 @@
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
 
+		<!-- Apache Camel & components tied to Spring Boot -->
 		<dependency>
 			<groupId>org.apache.camel.springboot</groupId>
 			<artifactId>camel-spring-boot-starter</artifactId>
-			<version>3.3.0</version>
+			<version>${camel.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel.springboot</groupId>
+			<artifactId>camel-servlet-starter</artifactId>
+			<version>${camel.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel.springboot</groupId>
+			<artifactId>camel-rest-starter</artifactId>
+			<version>${camel.version}</version>
 		</dependency>
 
+		<!-- testing -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
