@@ -56,4 +56,12 @@ class CamelCaseApplicationTests {
 				.content(equalTo("pong"));
 	}
 
+	@Test
+	void testIdInternalEndpoint() {
+		RestAssured.when().get("/my-api/camel/00000a/internal")
+				.then().statusCode(HttpStatus.SC_OK)
+				.contentType(ContentType.TEXT)
+				.content(equalTo("10"));
+	}
+
 }

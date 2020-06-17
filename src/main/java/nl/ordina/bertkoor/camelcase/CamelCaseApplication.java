@@ -22,6 +22,12 @@ public class CamelCaseApplication extends RouteBuilder {
 				.route().routeId("ping")
 				.setHeader(Exchange.CONTENT_TYPE, constant(MediaType.TEXT_PLAIN_VALUE))
 				.setBody(constant("pong"));
+
+		rest().get("/camel/{id}/internal")
+				.route().routeId("id-internal")
+				.to(TransformIdBean.URI)
+				.setHeader(Exchange.CONTENT_TYPE, constant(MediaType.TEXT_PLAIN_VALUE))
+				.setBody(simple("${header.id}"));
 	}
 
 }
