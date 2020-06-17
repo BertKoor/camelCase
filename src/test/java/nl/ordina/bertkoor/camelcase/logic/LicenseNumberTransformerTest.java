@@ -24,6 +24,9 @@ class LicenseNumberTransformerTest {
 
     @Test
     void checkTransformations() {
+        check("", null);
+        check(null, null);
+
         check("00000a", 10l); // smallest value
         check("0000a0", 360l); // shifting left...
         check("000a00", 12960l);
@@ -52,13 +55,13 @@ class LicenseNumberTransformerTest {
         try {
             long result = LicenseNumberTransformer.transform(id);
             if (expected == null) {
-                fail("InvalidLicenseIdException expected, but got " + result);
+                fail("IllegalArgumentException expected, but got " + result);
             } else {
                 assertEquals(expected, result);
             }
-        } catch (LicenseNumberTransformer.InvalidLicenseIdException ex) {
+        } catch (IllegalArgumentException ex) {
             if (expected != null) {
-                fail ("Expected result " + expected + " but InvalidLicenseIdException was thrown");
+                fail ("Expected result " + expected + " but IllegalArgumentException was thrown");
             }
         }
     }

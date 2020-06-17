@@ -1,5 +1,8 @@
 package nl.ordina.bertkoor.camelcase.logic;
 
+import io.micrometer.core.instrument.util.StringUtils;
+import org.springframework.util.Assert;
+
 /**
  * All camels have a license plate consisting of six letters or digits.
  * The camel registry systems use a numerical identifier derived from the license ID.
@@ -10,6 +13,8 @@ package nl.ordina.bertkoor.camelcase.logic;
 public class LicenseNumberTransformer {
 
     public static long transform(String id) {
+        Assert.isTrue(!StringUtils.isBlank(id), "Missing license ID.");
+
         long result = 0;
         int countLetters = 0;
         int countDigits = 0;
@@ -59,7 +64,7 @@ public class LicenseNumberTransformer {
         return (c >= 'A' && c <= 'Z');
     }
 
-    public static class InvalidLicenseIdException extends RuntimeException {
+    public static class InvalidLicenseIdException extends IllegalArgumentException {
         public InvalidLicenseIdException() {
             super("Invalid license ID.");
         }

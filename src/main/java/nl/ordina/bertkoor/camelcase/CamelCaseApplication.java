@@ -1,6 +1,5 @@
 package nl.ordina.bertkoor.camelcase;
 
-import nl.ordina.bertkoor.camelcase.logic.LicenseNumberTransformer;
 import org.apache.camel.Exchange;
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.boot.SpringApplication;
@@ -28,7 +27,7 @@ public class CamelCaseApplication extends RouteBuilder {
 	}
 
 	private void configureErrorHandling() {
-		onException(LicenseNumberTransformer.InvalidLicenseIdException.class)
+		onException(IllegalArgumentException.class)
 				.routeId("badRequest")
 				.handled(true)
 				.setHeader(Exchange.HTTP_RESPONSE_CODE, constant(HttpStatus.BAD_REQUEST.value()))
