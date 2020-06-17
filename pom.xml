@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>nl.ordina.bertkoor</groupId>
 	<artifactId>camelCase</artifactId>
-	<version>0.0.4</version>
+	<version>0.0.5</version>
 	<name>camelCase</name>
 	<description>Demo project for Apache Camel</description>
 
@@ -71,6 +71,25 @@
 					<artifactId>jaxb-osgi</artifactId>
 				</exclusion>
 			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-test-spring-junit5</artifactId>
+			<version>${camel.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-test-spring</artifactId>
+			<version>${camel.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-spring-javaconfig</artifactId>
+			<version>${camel.version}</version>
+			<scope>test</scope>
 		</dependency>
 
 	</dependencies>
