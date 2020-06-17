@@ -57,11 +57,19 @@ class CamelCaseApplicationTests {
 	}
 
 	@Test
-	void testIdInternalEndpoint() {
+	void testIdInternalEndpoint_ok() {
 		RestAssured.when().get("/my-api/camel/00000a/internal")
 				.then().statusCode(HttpStatus.SC_OK)
 				.contentType(ContentType.TEXT)
 				.content(equalTo("10"));
+	}
+
+	@Test
+	void testIdInternalEndpoint_error() {
+		RestAssured.when().get("/my-api/camel/x/internal")
+				.then().statusCode(HttpStatus.SC_BAD_REQUEST)
+				.contentType(ContentType.JSON)
+				.body("message", equalTo("Invalid license ID."));
 	}
 
 }
