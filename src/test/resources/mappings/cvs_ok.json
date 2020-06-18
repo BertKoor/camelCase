@@ -6,8 +6,7 @@
       { "matchesJsonPath": "$[?(@.weight =~ /[0-2000]/)]" },
       { "matchesJsonPath": "$[?(@.age =~ /[0-40]/)]" },
       { "matchesJsonPath": "$[?(@.humps =~ /[0-3]/)]" },
-      { "matchesJsonPath": "$[?(@.condition =~ /[1-9]/)]" },
-      { "matchesJsonPath": "$[?(@.rating =~ /[1-5]/)]" }
+      { "matchesJsonPath": "$[?(@.condition =~ /[1-9]/)]" }
     ]
   },
   "response": {

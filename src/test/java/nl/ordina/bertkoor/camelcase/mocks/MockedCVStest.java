@@ -73,13 +73,13 @@ public class MockedCVStest extends AbstractMockTest {
     }
 
     @Test
-    void camelValue_badRequest_missingRating() {
+    void camelValue_ok_missingRating() {
         RestAssured.given()
                 .body("{\"weight\" : 2, \"age\" : 2, \"humps\" : 2, \"condition\" : 2}")
                 .when().post(cvsEndpoint)
-                .then().statusCode(SC_BAD_REQUEST)
-                .contentType(ContentType.TEXT)
-                .content(equalTo("Bad request"));
+                .then().statusCode(SC_OK)
+                .contentType(ContentType.JSON)
+                .body("value", is(42));
     }
 
 }
