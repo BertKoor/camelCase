@@ -10,13 +10,14 @@
     </parent>
     <groupId>nl.ordina.bertkoor</groupId>
     <artifactId>camelCase</artifactId>
-    <version>0.0.5</version>
+    <version>0.0.6</version>
     <name>camelCase</name>
     <description>Demo project for Apache Camel</description>
 
     <properties>
         <java.version>11</java.version>
         <camel.version>3.3.0</camel.version>
+        <spring-cloud.version>Hoxton.BUILD-SNAPSHOT</spring-cloud.version>
     </properties>
 
     <dependencies>
@@ -92,7 +93,24 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-contract-wiremock</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <build>
         <plugins>

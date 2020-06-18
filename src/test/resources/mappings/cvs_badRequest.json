@@ -1,0 +1,13 @@
+{
+  "request": {
+    "url": "/mock-api/cvs/value",
+    "method": "POST"
+  },
+  "response": {
+    "status": 400,
+    "headers": {
+      "Content-Type": "text/plain"
+    },
+    "body": "Bad request"
+  }
+}
