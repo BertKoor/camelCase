@@ -7,6 +7,8 @@ It's attached to a talk I did on this subject which is posted on [YouTube](https
 I gave that talk earlier to colleagues of a big Dutch bank I work for, using the service my team had built as an example.
 But since no one outside that bank has access to that project, I had to come up with another public example project.
 
+The links to reference naterial are at the bottom of this article.
+
 ## The 'use case' of camelCase
 
 The business case here is all about camels.
@@ -67,10 +69,26 @@ I'd advise to look at the [commit history](https://github.com/BertKoor/camelCase
 
 ## References
 
-Here are some useful links:
+Here are all the links from the presentation :
 
- * https://camel.apache.org ofcourse
- * https://ordina-jtech.github.io/camel-workshop/index.html
-   (check out branches per exersize from repo https://github.com/Ordina-JTech/camel-workshop)
- * https://www.baeldung.com/apache-camel-spring-boot
- 
+ * https://camel.apache.org
+   is the main website of Apache Camel
+ * https://mvnrepository.com/artifact/org.apache.camel/camel-core 
+   lists publication dates of camel-core.jar, showing the version history and pace of development.
+ * https://camel.apache.org/components/latest/eips/enterprise-integration-patterns.html
+   lists common Enterprise Integration Patterns and ways how to implement them with Apache Camel
+ * https://camel.apache.org/components/latest/
+   is the main source for documentation on components developed for Apache Camel
+ * Getting Started:
+   1. https://www.manning.com/books/camel-in-action-second-edition
+      is the recommended book to read
+   1. https://ordina-jtech.github.io/camel-workshop/index.html
+      is the documentation page of the Camel workshop created by Ivo Woltring and Edwin Derksen.
+      To do the workshop, clone repo https://github.com/Ordina-JTech/camel-workshop
+      and check out a branch for each exersize.
+   1. https://www.baeldung.com/apache-camel-spring-boot
+      is another article explaining the setup of a simple project using Spring Boot and Camel
+ * https://start.spring.io
+   is the Spring Initializr that generates a project structure for you.
+   I would suggest to add dependencies Spring Web, Apache Camel, and optionally Spring Boot Actuator.
+   
