@@ -1,4 +1,4 @@
-package nl.ordina.bertkoor.camelcase;
+package nl.ordina.bertkoor.camelcase.beans;
 
 import nl.ordina.bertkoor.camelcase.logic.LicenseNumberTransformer;
 import org.apache.camel.Consume;

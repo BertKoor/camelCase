@@ -1,4 +1,4 @@
-package nl.ordina.bertkoor.camelcase;
+package nl.ordina.bertkoor.camelcase.beans;
 
 import org.apache.camel.EndpointInject;
 import org.apache.camel.Produce;

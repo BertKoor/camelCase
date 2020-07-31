@@ -1,5 +1,6 @@
 package nl.ordina.bertkoor.camelcase;
 
+import nl.ordina.bertkoor.camelcase.beans.TransformIdBean;
 import org.apache.camel.Exchange;
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.boot.SpringApplication;
