@@ -17,11 +17,6 @@ public class MockedCHStest extends AbstractMockTest {
 
     private static final String chsEndpoint = "/mock-api/chs/physical_health_status/";
 
-    @BeforeEach
-    void setup() {
-        RestAssured.port = wiremockPort();
-    }
-
     @Test
     void camelPhs_badRequest() {
         RestAssured.

@@ -2,8 +2,10 @@ package nl.ordina.bertkoor.camelcase.mocks;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
+import io.restassured.RestAssured;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestInstance;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -17,6 +19,11 @@ public abstract class AbstractMockTest {
         mockServer = new WireMockServer(WireMockConfiguration.options().port(0));
         mockServer.start();
         wiremockPort = mockServer.port();
+    }
+
+    @BeforeEach
+    void setup() {
+        RestAssured.port = wiremockPort();
     }
 
     @AfterAll

@@ -17,11 +17,6 @@ public class MockedCVStest extends AbstractMockTest {
 
     private static final String cvsEndpoint = "/mock-api/cvs/value";
 
-    @BeforeEach
-    void setup() {
-        RestAssured.port = wiremockPort();
-    }
-
     @Test
     void camelValue_ok() {
         RestAssured.given()
