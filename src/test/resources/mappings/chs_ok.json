@@ -1,0 +1,15 @@
+{
+  "request": {
+    "urlPattern": "/mock-api/chs/physical_health_status/\\d{2,10}",
+    "method": "GET"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "phs": 7
+    }
+  }
+}

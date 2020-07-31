@@ -1,0 +1,13 @@
+{
+  "request": {
+    "urlPattern": "/mock-api/chs/physical_health_status/.*",
+    "method": "GET"
+  },
+  "response": {
+    "status": 400,
+    "headers": {
+      "Content-Type": "text/plain"
+    },
+    "body": "Bad request"
+  }
+}
