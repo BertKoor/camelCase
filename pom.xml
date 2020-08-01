@@ -10,7 +10,7 @@
     </parent>
     <groupId>nl.ordina.bertkoor</groupId>
     <artifactId>camelCase</artifactId>
-    <version>0.0.7</version>
+    <version>0.0.8</version>
     <name>camelCase</name>
     <description>Demo project for Apache Camel</description>
 
@@ -46,6 +46,21 @@
             <groupId>org.apache.camel.springboot</groupId>
             <artifactId>camel-rest-starter</artifactId>
             <version>${camel.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel.springboot</groupId>
+            <artifactId>camel-http-starter</artifactId>
+            <version>${camel.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel.springboot</groupId>
+            <artifactId>camel-jackson-starter</artifactId>
+            <version>${camel.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
         </dependency>
 
         <!-- testing -->
