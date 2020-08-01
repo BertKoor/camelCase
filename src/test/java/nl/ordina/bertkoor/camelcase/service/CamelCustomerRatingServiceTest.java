@@ -1,7 +1,7 @@
 package nl.ordina.bertkoor.camelcase.service;
 
 import nl.ordina.bertkoor.camelcase.WireMockInitializer;
-import nl.ordina.bertkoor.camelcase.model.CHSResponse;
+import nl.ordina.bertkoor.camelcase.model.CCRSResponse;
 import org.apache.camel.CamelContext;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.Produce;
@@ -23,12 +23,12 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 
 @CamelSpringTest
-@ContextConfiguration(classes = CamelHealthServiceClientTest.CamelSpringTestConfig.class,
+@ContextConfiguration(classes = CamelCustomerRatingServiceTest.CamelSpringTestConfig.class,
         loader = CamelSpringDelegatingTestContextLoader.class,
         initializers = WireMockInitializer.class)
 @TestPropertySource(locations = "classpath:application.properties")
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-public class CamelHealthServiceClientTest {
+public class CamelCustomerRatingServiceTest {
     private static final String DIRECT_START_URI = "direct:start";
     private static final String MOCK_RESULT_URI = "mock:result";
 
@@ -36,7 +36,10 @@ public class CamelHealthServiceClientTest {
     private CamelContext camelContext;
 
     @Autowired
-    private CamelHealthServiceClient chsClient;
+    private CamelCustomerRatingServiceAdapter ccrsAdapter;
+
+    @Autowired
+    private CamelCustomerRatingServiceClient ccrsClient;
 
     @Produce(DIRECT_START_URI)
     ProducerTemplate producer;
@@ -46,10 +49,11 @@ public class CamelHealthServiceClientTest {
 
     @BeforeAll
     static void setup() { // Dirty hack: avoid NPE in CamelSpringDelegatingTestContextLoader.
-        CamelSpringTestHelper.setTestClass(CamelHealthServiceClientTest.class);
+        CamelSpringTestHelper.setTestClass(CamelCustomerRatingServiceTest.class);
     }
 
-    @TestConfiguration @ComponentScan(resourcePattern = "CamelHealthServiceClient.class")
+    @TestConfiguration
+    @ComponentScan(resourcePattern = "CamelCustomerRatingService*.class")
     public static class CamelSpringTestConfig extends SingleRouteCamelConfiguration {
         @Override
         public RouteBuilder route() {
@@ -57,7 +61,7 @@ public class CamelHealthServiceClientTest {
                 @Override
                 public void configure() throws Exception {
                     from(DIRECT_START_URI)
-                            .to(CamelHealthServiceClient.URI)
+                            .to(CamelCustomerRatingServiceAdapter.URI)
                             .to(MOCK_RESULT_URI);
                 }
             };
@@ -67,19 +71,31 @@ public class CamelHealthServiceClientTest {
     @BeforeEach
     public void setUp() throws Exception {
         // Hack our RouteBuilder into the context. Bean definition / ComponentScan doesn't work for RouteBuilders.
-        if (camelContext.getRoute(CamelHealthServiceClient.URI) == null) {
-            camelContext.addRoutes(chsClient);
+        if (camelContext.getRoute(CamelCustomerRatingServiceAdapter.URI) == null) {
+            camelContext.addRoutes(ccrsAdapter);
+        }
+        if (camelContext.getRoute(CamelCustomerRatingServiceClient.URI) == null) {
+            camelContext.addRoutes(ccrsClient);
         }
     }
 
     @Test
-    void test_ok() throws InterruptedException {
+    void test_noRating() throws InterruptedException {
         resultEndpoint.expectedMessageCount(1);
-        resultEndpoint.expectedBodiesReceived(new CHSResponse(7));
+        resultEndpoint.expectedBodiesReceived(new CCRSResponse(null));
 
-        producer.sendBodyAndHeader(null, "id", "123");
+        producer.sendBodyAndHeader(null, "id", "100");
 
         resultEndpoint.assertIsSatisfied();
     }
 
+    @Test
+    void test_rating3() throws InterruptedException {
+        resultEndpoint.expectedMessageCount(1);
+        resultEndpoint.expectedBodiesReceived(new CCRSResponse(3));
+
+        producer.sendBodyAndHeader(null, "id", "12345");
+
+        resultEndpoint.assertIsSatisfied();
+    }
 }

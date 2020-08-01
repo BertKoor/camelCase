@@ -2,6 +2,7 @@ package nl.ordina.bertkoor.camelcase;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
+import nl.ordina.bertkoor.camelcase.mocks.CcrsResponseTransformer;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
@@ -14,7 +15,11 @@ public class WireMockInitializer implements ApplicationContextInitializer<Config
     private WireMockServer mockServer;
 
     public static WireMockServer newStartedServer() {
-        WireMockServer server = new WireMockServer(WireMockConfiguration.options().port(0));
+        WireMockServer server = new WireMockServer(
+                WireMockConfiguration.options()
+                        .port(0)
+                        .extensions(CcrsResponseTransformer.class)
+        );
         server.start();
         return server;
     }

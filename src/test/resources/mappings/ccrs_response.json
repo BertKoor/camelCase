@@ -1,0 +1,9 @@
+{
+  "request": {
+    "urlPattern": "/mock-api/ccrs/rating/.*",
+    "method": "GET"
+  },
+  "response": {
+    "transformers": ["ccrs-response"]
+  }
+}
