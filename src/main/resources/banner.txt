@@ -1,0 +1,1 @@
+<-- CamelCase - by BertKoor, powered by Spring Boot${spring-boot.formatted-version} -->
