@@ -30,6 +30,9 @@ public class CamelCustomerRatingServiceClient extends RouteBuilder {
                 .choice()
                     .when(isHttpStatus204).setBody(constant("{}"))
                 .endChoice();
+                // The route should continue with unmarshalling json
+                // but after the choice it is no longer a RouteDefinition.
+                // So the ServiceAdapter takes care of the unmarshalling.
     }
 
 }

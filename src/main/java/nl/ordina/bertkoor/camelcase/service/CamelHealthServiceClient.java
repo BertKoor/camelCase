@@ -21,8 +21,8 @@ public class CamelHealthServiceClient extends RouteBuilder {
     public void configure() {
         from(URI)
                 .routeId(URI)
+                // toD = 'Dynamic' form of 'to', which evaluates expressions
                 .toD("http:" + host + endpoint + "${header.id}")
                 .unmarshal().json(JsonLibrary.Jackson, CHSResponse.class);
-        ;
     }
 }
