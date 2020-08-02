@@ -4,10 +4,10 @@ This is a simple demo project for [Apache Camel](https://camel.apache.org)
 used in a [Spring Boot](https://spring.io/projects/spring-boot) application. 
 
 It's attached to a talk I did on this subject which is posted on [YouTube](https://youtu.be/2N_zC9X70F8).
-I gave that talk earlier to colleagues of a big Dutch bank I work for, using the service my team had built as an example.
+I gave that talk in March 2018 to colleagues of a big Dutch bank I work for, using the service my team had built as an example.
 But since no one outside that bank has access to that project, I had to come up with another public example project.
 
-The links to reference naterial are at the bottom of this article.
+The links to reference material can be found at the bottom of this article.
 
 ## The 'use case' of camelCase
 
@@ -32,14 +32,14 @@ a couple of services and resources already exist:
  * The __CVS__ (Camel Valuation Service) is already developed. 
    It takes some depersonalized input values of a camel such as the weight, age, number of humps, 
    physical condition and customer rating to calculate an estimation of the camel's market value.
- * The __CR__ (Camel Registry) is a datastore which contains details like the weight, age and number of humps.
+ * The __CR__ (Camel Registry) is a legacy datastore which contains details like the weight, year & month of birth and number of humps.
  * The __CHS__ (Camel Health Service) holds the medical history and periodical medical check results of any registered camel.
    Based on the health records it can return the PHS (physical historical state) of a camel, 
    expressed in a number from one (very bad) to ten (very good).
  * Camels that are rented out might get star ratings from customers, 
    expressing their customer happiness in using that particular camel.
    The average rating can be retrieved from the __CCRS__ (Camel Customer Rating Service)
-   and is expressed in a number between one (bad) and five (good) in a precision of halve stars.
+   and is expressed in a number between one (bad) and five (good).
 
 ### Camel License ID's
 
