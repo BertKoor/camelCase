@@ -1,6 +1,6 @@
 {
   "request": {
-    "urlPattern": "/mock-api/chs/physical_health_status/.*",
+    "urlPattern": "/mock-api/ccrs/rating/.*",
     "method": "GET"
   },
   "priority": 12,

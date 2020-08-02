@@ -3,6 +3,7 @@
     "urlPattern": "/mock-api/chs/physical_health_status/\\d{2,10}",
     "method": "GET"
   },
+  "priority": 10,
   "response": {
     "status": 200,
     "headers": {

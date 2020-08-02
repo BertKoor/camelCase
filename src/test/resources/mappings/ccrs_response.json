@@ -1,6 +1,6 @@
 {
   "request": {
-    "urlPattern": "/mock-api/ccrs/rating/.*",
+    "urlPattern": "/mock-api/ccrs/rating/\\d{2,10}",
     "method": "GET"
   },
   "response": {

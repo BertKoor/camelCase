@@ -13,7 +13,6 @@ import java.util.regex.Pattern;
 
 public class CcrsResponseTransformer extends ResponseTemplateTransformer {
 
-    private static final Pattern IS_OK = Pattern.compile("\\d{2,10}");
     private static final Pattern IS_RATING = Pattern.compile("[1-5]{3,10}");
 
     public CcrsResponseTransformer() {
@@ -29,9 +28,6 @@ public class CcrsResponseTransformer extends ResponseTemplateTransformer {
     public ResponseDefinition transform(Request request, ResponseDefinition responseDefinition, FileSource files, Parameters parameters) {
         int p = request.getUrl().lastIndexOf('/') + 1;
         String id = request.getUrl().substring(p);
-        if (!IS_OK.matcher(id).matches())
-            return badRequest();
-
         return IS_RATING.matcher(id).matches() ? ok(rating(id)) : noContent();
     }
 
@@ -46,14 +42,6 @@ public class CcrsResponseTransformer extends ResponseTemplateTransformer {
         }
         int result = sum / count;
         return "" + result;
-    }
-
-    private ResponseDefinition badRequest() {
-        return new ResponseDefinitionBuilder()
-                .withStatus(HttpStatus.SC_BAD_REQUEST)
-                .withHeader("Content-Type", ContentType.TEXT_PLAIN.toString())
-                .withBody("Bad request")
-                .build();
     }
 
     private ResponseDefinition ok(String rating) {
