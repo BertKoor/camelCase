@@ -1,0 +1,2 @@
+set schema CAMEL_OWNER;
+insert into CAMEL_REGISTRY (ID, BIRTH_YEAR, BIRTH_MONTH, HUMPS, WEIGHT) values (10, 1990, 1, 2, 2500);

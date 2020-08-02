@@ -45,6 +45,7 @@ class CamelCaseApplicationTests {
                 .then().statusCode(HttpStatus.SC_OK)
                 .contentType(ContentType.JSON)
                 .body("status", equalTo("UP"))
+                .body("components.db.status", equalTo("UP"))
                 .body("components.camelHealth.status", equalTo("UP"));
     }
 
