@@ -1,14 +1,21 @@
 package nl.ordina.bertkoor.camelcase;
 
+import nl.ordina.bertkoor.camelcase.repo.CamelRegistryBean;
 import nl.ordina.bertkoor.camelcase.beans.TransformIdBean;
+import nl.ordina.bertkoor.camelcase.repo.CamelRegistry;
+import nl.ordina.bertkoor.camelcase.model.RegistryData;
 import org.apache.camel.Exchange;
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 
 @SpringBootApplication
+@EnableJpaRepositories(basePackageClasses = CamelRegistry.class)
+@EntityScan(basePackageClasses = RegistryData.class)
 public class CamelCaseApplication extends RouteBuilder {
 
     public static final String ERROR_URI = "direct:error";
@@ -25,6 +32,7 @@ public class CamelCaseApplication extends RouteBuilder {
         configureErrorHandling();
         configureEndpointPing();
         configureEndpointIdInternal();
+        configureEndpointRegistry();
     }
 
     private void configureErrorHandling() {
@@ -54,4 +62,11 @@ public class CamelCaseApplication extends RouteBuilder {
                 .setBody(simple("${header.id}"));
     }
 
+    private void configureEndpointRegistry() {
+        rest().get("/camel/{id}/registry")
+                .route().routeId("id-registry")
+                .to(TransformIdBean.URI)
+                .to(CamelRegistryBean.URI)
+                .marshal().json();
+    }
 }

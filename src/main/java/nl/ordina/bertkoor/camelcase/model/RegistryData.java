@@ -1,4 +1,4 @@
-package nl.ordina.bertkoor.camelcase.repo;
+package nl.ordina.bertkoor.camelcase.model;
 
 import lombok.Data;
 
@@ -6,7 +6,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.math.BigInteger;
 
 @Data
 @Entity
@@ -14,16 +13,16 @@ import java.math.BigInteger;
 public class RegistryData {
 
     @Id @Column(name = "id")
-    private BigInteger id;
+    private Long id;
 
     @Column(name = "birth_year")
     private int birthYear;
 
     @Column(name = "birth_month")
-    private short birthMonth;
+    private int birthMonth;
 
     @Column(name = "humps")
-    private short humps;
+    private int humps;
 
     @Column(name = "weight")
     private int weight;

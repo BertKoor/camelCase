@@ -73,4 +73,21 @@ class CamelCaseApplicationTests {
                 .body("message", equalTo("Invalid license ID."));
     }
 
+    @Test
+    void testRegistryEndpoint_ok() {
+        RestAssured.when().get("/my-api/camel/00000a/registry")
+                .then().statusCode(HttpStatus.SC_OK)
+                .contentType(ContentType.JSON)
+                .body("birthYear", equalTo(1990))
+                .body("humps", equalTo(2))
+                .body("weight", equalTo(2500));
+    }
+
+    @Test
+    void testRegistryEndpoint_null() {
+        RestAssured.when().get("/my-api/camel/00000b/registry")
+                .then().statusCode(HttpStatus.SC_OK)
+                .contentType(ContentType.JSON)
+                .content(equalTo("null"));
+    }
 }
