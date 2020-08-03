@@ -1,34 +1,21 @@
 package nl.ordina.bertkoor.camelcase.service;
 
-import nl.ordina.bertkoor.camelcase.WireMockInitializer;
 import nl.ordina.bertkoor.camelcase.model.CHSResponse;
+import nl.ordina.bertkoor.camelcase.test.MyCamelSpringTest;
+import nl.ordina.bertkoor.camelcase.test.MyCamelSpringTestContextLoader;
 import org.apache.camel.CamelContext;
-import org.apache.camel.EndpointInject;
-import org.apache.camel.Produce;
-import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.spring.javaconfig.SingleRouteCamelConfiguration;
-import org.apache.camel.test.spring.CamelSpringDelegatingTestContextLoader;
-import org.apache.camel.test.spring.CamelSpringTestHelper;
-import org.apache.camel.test.spring.junit5.CamelSpringTest;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestPropertySource;
 
-@CamelSpringTest
-@ContextConfiguration(classes = CamelHealthServiceClientTest.CamelSpringTestConfig.class,
-        loader = CamelSpringDelegatingTestContextLoader.class,
-        initializers = WireMockInitializer.class)
-@TestPropertySource(locations = "classpath:application.properties")
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-public class CamelHealthServiceClientTest {
+@ContextConfiguration(loader = MyCamelSpringTestContextLoader.class,
+        initializers = MyCamelSpringTest.WireMockInitializer.class)
+public class CamelHealthServiceClientTest extends MyCamelSpringTest {
     private static final String DIRECT_START_URI = "direct:start";
     private static final String MOCK_RESULT_URI = "mock:result";
 
@@ -38,18 +25,8 @@ public class CamelHealthServiceClientTest {
     @Autowired
     private CamelHealthServiceClient chsClient;
 
-    @Produce(DIRECT_START_URI)
-    ProducerTemplate producer;
-
-    @EndpointInject(MOCK_RESULT_URI)
-    MockEndpoint resultEndpoint;
-
-    @BeforeAll
-    static void setup() { // Dirty hack: avoid NPE in CamelSpringDelegatingTestContextLoader.
-        CamelSpringTestHelper.setTestClass(CamelHealthServiceClientTest.class);
-    }
-
-    @TestConfiguration @ComponentScan(resourcePattern = "CamelHealthServiceClient.class")
+    @TestConfiguration
+    @ComponentScan(resourcePattern = "CamelHealthServiceClient.class")
     public static class CamelSpringTestConfig extends SingleRouteCamelConfiguration {
         @Override
         public RouteBuilder route() {
